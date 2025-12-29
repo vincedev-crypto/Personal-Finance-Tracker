@@ -1,0 +1,695 @@
+/* static/css/dashboard.css */
+
+/* ------------------------------ */
+/* --- DARK THEME CSS VARIABLES --- */
+/* ------------------------------ */
+:root {
+  /* Base Backgrounds */
+  --bg-main: #161824;
+  --bg-content-area: #1F2131;
+  --bg-sidebar: #1F2131; /* Sidebar now matches content area for a more unified look */
+  --bg-card: #2A2D40;
+  --bg-card-hover: #313552;
+  --bg-card-accent: #FF7A7A; /* Example: Total Net Worth card (if you create one) */
+  --bg-input: #1A1C2A;
+  --bg-input-focus: #232539;
+
+  /* Text Colors */
+  --text-primary: #E0E0E0;
+  --text-secondary: #A0A0B5;
+  --text-headings: #FFFFFF;
+  --text-link: #6289F5;
+  --text-link-hover: #79A0FF;
+  --text-on-accent-card: #FFFFFF;
+
+  /* Accent & Status Colors */
+  --accent-primary: #6289F5;
+  --accent-primary-rgb: 98, 137, 245; /* RGB version for rgba() */
+  --accent-secondary: #A259FF;
+  --accent-secondary-rgb: 162, 89, 255; /* RGB version for rgba() */
+  --accent-tertiary: #FF7A7A;
+  --accent-quaternary: #00C9E1;
+  --status-success: #32D7A4;
+  --status-success-rgb: 50, 215, 164;
+  --status-danger: var(--accent-tertiary);
+  --status-danger-rgb: 255, 122, 122;
+  --status-warning: #FFA500;
+
+  /* Borders & Shadows */
+  --border-color: #3A3D52;
+  --border-color-light: rgba(200, 200, 220, 0.1);
+  --box-shadow-card: 0 4px 10px rgba(0, 0, 0, 0.15);
+  --box-shadow-interactive: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+  /* Typography & Spacing */
+  --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-size-base: 1rem;
+  --font-size-sm: 0.875rem;
+  --font-size-xs: 0.75rem;
+  --line-height-base: 1.6;
+
+  --border-radius-base: 0.5rem;
+  --border-radius-lg: 0.75rem;
+
+  --spacing-unit: 0.25rem;
+  --spacing-xs: calc(1 * var(--spacing-unit));
+  --spacing-sm: calc(2 * var(--spacing-unit));
+  --spacing-md: calc(4 * var(--spacing-unit));
+  --spacing-lg: calc(6 * var(--spacing-unit));
+  --spacing-xl: calc(8 * var(--spacing-unit));
+
+  --transition-duration: 0.25s;
+  --transition-timing: ease-in-out;
+  --transition-base: all var(--transition-duration) var(--transition-timing);
+
+  --sidebar-width: 260px; /* Ensure this is consistent */
+}
+
+/* -------------------- */
+/* --- Global Styles --- */
+/* -------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  line-height: var(--line-height-base);
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  min-height: 100vh;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-headings);
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: var(--spacing-md);
+}
+h1 { font-size: 2rem; }
+h2 { font-size: 1.6rem; }
+h3 { font-size: 1.3rem; }
+
+a {
+  color: var(--text-link);
+  text-decoration: none;
+  transition: var(--transition-base);
+}
+a:hover {
+  color: var(--text-link-hover);
+}
+
+.text-primary { color: var(--accent-primary) !important; }
+.text-success { color: var(--status-success) !important; }
+.text-danger { color: var(--status-danger) !important; }
+.text-warning { color: var(--status-warning) !important; }
+.text-info { color: var(--accent-quaternary) !important; }
+.text-muted { color: var(--text-secondary) !important; }
+
+/* -------------------- */
+/* --- Sidebar --- */
+/* -------------------- */
+.sidebar {
+  background-color: var(--bg-sidebar);
+  padding: var(--spacing-lg) var(--spacing-md);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* border-right: 1px solid var(--border-color); Optional visual separator */
+}
+
+.sidebar .navbar-brand {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-xs) 0 var(--spacing-xl) 0;
+  text-align: left;
+}
+.sidebar .navbar-brand img.app-logo { /* If you add a logo image */
+    width: 30px;
+    height: 30px;
+    margin-right: var(--spacing-sm);
+}
+.sidebar .navbar-brand .app-name .main {
+  display: block;
+  color: var(--text-headings);
+  font-size: 1.05rem; /* Slightly adjusted */
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.sidebar .navbar-brand .app-name .sub { display: none; } /* Keeping sub-name hidden */
+
+.sidebar .nav-link {
+  color: var(--text-secondary) !important; /* Using important to override Bootstrap if needed */
+  padding: var(--spacing-md) !important; /* Consistent padding */
+  border-radius: var(--border-radius-base);
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--spacing-sm);
+  transition: background-color var(--transition-duration) var(--transition-timing),
+              color var(--transition-duration) var(--transition-timing),
+              transform var(--transition-duration) var(--transition-timing);
+}
+.sidebar .nav-link i.fas {
+  font-size: 1.1rem;
+  width: 24px;
+  text-align: center;
+  margin-right: var(--spacing-md);
+  color: var(--text-secondary); /* Icons inherit nav-link color or have their own */
+  transition: color var(--transition-duration) var(--transition-timing);
+}
+.sidebar .nav-link:hover {
+  background-color: rgba(var(--accent-primary-rgb), 0.1);
+  color: var(--text-link-hover) !important;
+  transform: translateX(3px);
+}
+.sidebar .nav-link:hover i.fas {
+  color: var(--text-link-hover);
+}
+.sidebar .nav-link.active {
+  background-color: var(--accent-primary) !important;
+  color: var(--text-headings) !important;
+  font-weight: 600;
+  box-shadow: 0 3px 8px rgba(var(--accent-primary-rgb), 0.3);
+}
+.sidebar .nav-link.active i.fas {
+  color: var(--text-headings) !important;
+}
+
+/* Sidebar Notification specific */
+.sidebar #notificationsDropdownContainer .nav-link .badge { /* #notificationBadge */
+  background-color: var(--status-danger) !important;
+  color: var(--text-headings) !important;
+  font-size: 0.65rem; /* Slightly adjusted */
+  padding: 0.3em 0.5em;
+  vertical-align: text-top; /* Better alignment */
+  margin-left: var(--spacing-sm);
+}
+.sidebar #notificationsList.dropdown-menu { /* Target ul directly */
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--box-shadow-card);
+  border-radius: var(--border-radius-base);
+  width: 320px; /* Or as needed */
+  max-height: 400px;
+  overflow-y: auto;
+  padding-top: 0; /* Remove default Bootstrap padding */
+  padding-bottom: 0;
+}
+.sidebar #notificationsList .dropdown-header {
+  color: var(--text-headings);
+  font-weight: 600;
+  padding: var(--spacing-md); /* Consistent padding */
+  background-color: var(--bg-card-hover); /* Header background */
+}
+.sidebar #notificationsList .dropdown-divider {
+  border-top: 1px solid var(--border-color);
+  margin: 0;
+}
+.sidebar #notificationsList .dropdown-item {
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  white-space: normal;
+  border-bottom: 1px solid var(--border-color-light); /* Separator for items */
+}
+.sidebar #notificationsList .dropdown-item:last-child {
+    border-bottom: none;
+}
+.sidebar #notificationsList .dropdown-item:hover,
+.sidebar #notificationsList .dropdown-item:focus {
+  background-color: var(--bg-card-hover);
+  color: var(--text-headings);
+}
+.sidebar #notificationsList .notification-item.unread { /* class 'fw-bold' from JS might be enough */
+  background-color: rgba(var(--accent-primary-rgb), 0.08); /* Subtle highlight for unread */
+}
+.sidebar #notificationsList .notification-item .small {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  margin-top: var(--spacing-xs);
+  display: block;
+}
+.sidebar #notificationsList a#markAllAsReadBtn.dropdown-item {
+    text-align: center;
+    font-weight: 500;
+    color: var(--text-link);
+    padding: var(--spacing-md);
+    border-top: 1px solid var(--border-color);
+}
+.sidebar #notificationsList a#markAllAsReadBtn.dropdown-item:hover {
+    background-color: var(--bg-card-hover);
+    color: var(--text-link-hover);
+}
+
+
+/* -------------------- */
+/* --- Main Content --- */
+/* -------------------- */
+.main-content {
+  background-color: var(--bg-content-area);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  width: 100%; /* Ensure it takes remaining width */
+  overflow-y: auto; /* Allow scrolling for content */
+}
+
+/* Page titles within main content */
+.dashboard-title-style { /* Used on transactions.html, transaction-form.html */
+    font-size: 1.8rem; /* Adjusted for consistency */
+    font-weight: 600;
+    color: var(--text-headings);
+}
+
+/* -------------------- */
+/* --- Card Styling (General) --- */
+/* -------------------- */
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color); /* Add subtle border for definition */
+  border-radius: var(--border-radius-lg);
+  margin-bottom: var(--spacing-lg);
+  color: var(--text-primary); /* Default text color for content inside cards */
+  overflow: hidden; /* Respect child border-radius */
+  box-shadow: var(--box-shadow-card); /* Add shadow back for depth if desired */
+}
+
+.card-header {
+  background-color: transparent; /* Or var(--bg-card-hover) for a slight tint */
+  border-bottom: 1px solid var(--border-color-light);
+  padding: var(--spacing-md) var(--spacing-lg);
+  color: var(--text-headings);
+  font-weight: 600;
+  font-size: 1rem; /* Slightly larger for card titles */
+}
+
+.card-body {
+    padding: var(--spacing-lg); /* Consistent padding for card bodies */
+}
+
+/* Ensure headings and paragraphs within ANY card default to light if not overridden by more specific rules */
+.card h1, .card h2, .card h3, .card h4, .card h5, .card h6 {
+    color: var(--text-headings);
+}
+.card p { /* Default paragraph text in cards */
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-md); /* Add default margin to paragraphs */
+}
+.card .card-title { /* Bootstrap's .card-title, often an h5 */
+  color: var(--text-headings); /* Ensure it's bright */
+  font-size: 1.1rem; /* Adjust as needed */
+  font-weight: 500; /* Match dashboard image more closely */
+  margin-bottom: var(--spacing-md); /* Space after title */
+}
+
+/* Specific card classes used on dashboard.html */
+.content-card, /* Generic wrapper for content blocks */
+.summary-card-alt { /* For the "Summary for [Month]" card */
+    background-color: var(--bg-card); /* Explicitly ensure dark background */
+    color: var(--text-primary);
+    /* Other styles like border, border-radius are inherited from .card */
+}
+
+.summary-card-alt .card-title, /* h5 like "Summary for May" */
+.summary-card-alt h6 {       /* h6 labels like "Total Income", "Total Expenses" */
+    color: var(--text-headings); /* Ensure these are bright white */
+}
+.summary-card-alt p.fs-5.text-success { /* Monetary values */
+    color: var(--status-success) !important;
+}
+.summary-card-alt p.fs-5.text-danger {
+    color: var(--status-danger) !important;
+}
+
+/* Budget card specific styles from dashboard.html */
+.dashboard-header h2.text-primary-emphasis { /* "Personal Finance Dashboard" title */
+    color: var(--text-headings) !important; /* Make it white */
+    font-weight: 700;
+}
+.card .input-group .input-group-text { /* For ₱ symbol */
+    background-color: var(--bg-input);
+    border-color: var(--border-color);
+    color: var(--text-secondary);
+}
+.card .progress { /* Budget usage progress bar */
+    height: 25px;
+    background-color: var(--bg-input); /* Darker track */
+    border-radius: var(--border-radius-base);
+}
+.card .progress-bar.bg-warning { /* Ensure progress bar color is from theme */
+    background-color: var(--status-warning) !important;
+    color: #333; /* Dark text on yellow for readability */
+}
+
+
+/* -------------------- */
+/* --- Forms & Inputs --- */
+/* -------------------- */
+.form-label {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-bottom: var(--spacing-xs);
+}
+.form-control, .form-select {
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: var(--border-radius-base);
+  padding: 0.6rem 1rem;
+  transition: var(--transition-base);
+}
+.form-control::placeholder, .form-select::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+.form-control:focus, .form-select:focus {
+  background-color: var(--bg-input-focus);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 0.2rem rgba(var(--accent-primary-rgb), 0.25);
+  color: var(--text-primary);
+}
+
+/* -------------------- */
+/* --- Buttons --- */
+/* -------------------- */
+.btn {
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--border-radius-base);
+  font-weight: 500;
+  font-size: var(--font-size-sm);
+  transition: var(--transition-base);
+  border: 1px solid transparent;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+.btn:focus, .btn.focus { /* Add .focus for Bootstrap */
+  box-shadow: 0 0 0 0.2rem rgba(var(--accent-primary-rgb), 0.3);
+}
+
+.btn-primary {
+  background-color: var(--accent-primary);
+  color: var(--text-headings);
+  border-color: var(--accent-primary);
+}
+.btn-primary:hover {
+  background-color: var(--text-link-hover);
+  border-color: var(--text-link-hover);
+}
+.btn-success { background-color: var(--status-success); color: var(--bg-main); border-color: var(--status-success); }
+.btn-success:hover { filter: brightness(0.9); }
+.btn-danger { background-color: var(--status-danger); color: var(--text-headings); border-color: var(--status-danger); }
+.btn-danger:hover { filter: brightness(0.9); }
+
+.btn-outline-secondary { /* For "Clear Filters" etc. */
+    color: var(--text-secondary);
+    border-color: var(--border-color);
+}
+.btn-outline-secondary:hover {
+    color: var(--text-primary);
+    background-color: var(--bg-card-hover);
+    border-color: var(--border-color);
+}
+
+
+/* -------------------- */
+/* --- Tables (general for dark theme) --- */
+/* -------------------- */
+.table { /* General table styling within the theme */
+  color: var(--text-primary);
+  margin-bottom: 0;
+  border-color: var(--border-color); /* For table borders if any */
+}
+.table th, .table td {
+  padding: var(--spacing-md) var(--spacing-lg);
+  vertical-align: middle;
+  border-top: 1px solid var(--border-color); /* Horizontal lines between rows */
+}
+.table thead th {
+  background-color: var(--bg-card-hover); /* Darker header for tables */
+  color: var(--text-headings); /* Brighter text for headers */
+  font-weight: 500;
+  font-size: var(--font-size-sm); /* Adjusted */
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--border-color);
+}
+.table tbody tr:hover {
+  background-color: rgba(var(--accent-primary-rgb), 0.07); /* Subtle hover */
+  color: var(--text-headings); /* Text might brighten on hover */
+}
+.table td.amount {
+    font-weight: 500;
+}
+.table td.text-success { /* Bootstrap class for income */
+  font-weight: 500;
+  color: var(--status-success) !important;
+}
+.table td.text-danger { /* Bootstrap class for expense */
+  font-weight: 500;
+  color: var(--status-danger) !important;
+}
+.table-sm th, .table-sm td { /* From dashboard.html */
+    padding: 0.5rem; /* Adjusted for .table-sm */
+}
+.table .fa-sort { /* Sorting icons in table headers */
+    color: var(--text-secondary);
+    margin-left: var(--spacing-xs);
+}
+.table .fa-sort:hover {
+    color: var(--accent-primary);
+}
+
+/* Striped tables for dark theme */
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+    --bs-table-accent-bg: rgba(255, 255, 255, 0.02); /* Very subtle light striping on dark */
+    color: inherit;
+}
+
+
+/* -------------------- */
+/* --- Alerts --- */
+/* -------------------- */
+.alert {
+    border-left-width: 4px;
+    border-radius: var(--border-radius-base);
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-md) var(--spacing-lg);
+}
+.alert-success {
+    background-color: rgba(var(--status-success-rgb), 0.1);
+    border-color: var(--status-success);
+    color: var(--status-success);
+}
+.alert-danger {
+    background-color: rgba(var(--status-danger-rgb), 0.1);
+    border-color: var(--status-danger);
+    color: var(--status-danger);
+}
+.alert-info { /* For logout message etc. */
+    background-color: rgba(var(--accent-quaternary-rgb, 0, 201, 225), 0.1); /* Define accent-quaternary-rgb if not present */
+    border-color: var(--accent-quaternary);
+    color: var(--accent-quaternary);
+}
+.alert .btn-close { /* For alert close buttons */
+    filter: invert(75%) sepia(10%) saturate(500%) hue-rotate(180deg) brightness(100%) contrast(85%); /* Make default bootstrap close button visible on dark theme alerts */
+}
+.alert-success .btn-close { filter: invert(60%) sepia(50%) saturate(500%) hue-rotate(80deg) brightness(100%) contrast(85%); }
+.alert-danger .btn-close { filter: invert(50%) sepia(50%) saturate(500%) hue-rotate(320deg) brightness(100%) contrast(85%); }
+
+
+/* -------------------- */
+/* --- Chart Placeholders --- */
+/* -------------------- */
+.chart-container {
+  width: 100%;
+  min-height: 280px;
+  flex-grow: 1;
+  padding: var(--spacing-xs);
+}
+.chart-container-large { /* Used on dashboard for main charts */
+    min-height: 370px; /* Adjusted */
+}
+
+/* -------------------- */
+/* --- Profile & Change Password Page Specific --- */
+/* (styles previously in profile.css or change-password.css can be integrated or use vars) */
+/* -------------------- */
+.profile-header, .change-password-header {
+  text-align: left; /* Changed from center for a more standard look */
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--border-color);
+}
+.profile-header h2, .change-password-header h2 {
+  font-size: 1.8rem;
+  color: var(--text-headings);
+}
+
+.profile-card .card-body, .change-password-card .card-body { /* Assuming these are main cards on those pages */
+  /* .card styling is already applied */
+}
+.profile-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md) 0;
+  border-bottom: 1px solid var(--border-color-light);
+  font-size: var(--font-size-sm);
+}
+.profile-info-row:last-child { border-bottom: none; }
+.profile-info-row label {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+.profile-info-row label i.fas {
+  margin-right: var(--spacing-sm);
+  color: var(--accent-primary);
+  width: 18px; text-align: center;
+}
+.profile-info-row .info-value {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+.profile-info-row .info-value .badge.bg-success { background-color: var(--status-success) !important; }
+.profile-info-row .info-value .badge.bg-secondary { background-color: var(--text-secondary) !important; color: var(--bg-card) !important; }
+
+.profile-actions, .change-password-actions {
+  margin-top: var(--spacing-lg);
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-sm);
+}
+.profile-actions .btn-warning, .change-password-actions .btn-warning { /* Change Password / Update button */
+    background-color: var(--status-warning);
+    color: #333;
+    border-color: var(--status-warning);
+}
+.profile-actions .btn-warning:hover, .change-password-actions .btn-warning:hover {
+    filter: brightness(0.9);
+}
+.change-password-actions .btn-secondary { /* Cancel button */
+    background-color: var(--bg-card-hover);
+    color: var(--text-secondary);
+    border-color: var(--border-color);
+}
+.change-password-actions .btn-secondary:hover {
+    background-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+/* Activity Log on profile page */
+.profile-card .list-group-item { /* Assuming activity log is in a .list-group */
+  background-color: transparent;
+  border-color: var(--border-color-light) !important; /* Override bootstrap */
+  padding: var(--spacing-sm) 0; /* Remove horizontal padding if card-body has it */
+}
+.profile-card .list-group-item h6 {
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+}
+.profile-card .list-group-item small.text-muted {
+  font-size: var(--font-size-xs);
+}
+
+/* Pagination (can be global, for activity log etc.) */
+.pagination .page-item .page-link {
+  background-color: var(--bg-input); /* Changed from --bg-card */
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  margin: 0 var(--spacing-xs);
+  border-radius: var(--border-radius-base);
+  font-size: var(--font-size-sm);
+}
+.pagination .page-item .page-link:hover {
+  background-color: var(--bg-input-focus); /* Changed from --bg-card-hover */
+  color: var(--text-primary);
+  border-color: var(--accent-primary);
+}
+.pagination .page-item.active .page-link {
+  background-color: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: var(--text-headings);
+  font-weight: 600;
+}
+.pagination .page-item.disabled .page-link {
+  color: var(--text-secondary);
+  opacity: 0.6;
+  background-color: transparent;
+  border-color: var(--border-color); /* Ensure disabled also has border */
+}
+
+/* -------------------- */
+/* --- Responsive --- */
+/* -------------------- */
+@media (max-width: 992px) { /* Tablet and smaller */
+  body {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    height: auto;
+    position: static;
+    /* Consider implementing an off-canvas toggle for mobile */
+  }
+  .main-content {
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin-left: 0; /* Remove margin when sidebar is not fixed */
+  }
+}
+
+@media (max-width: 768px) { /* Mobile */
+  .main-content {
+    padding: var(--spacing-md);
+  }
+  .dashboard-title-style { font-size: 1.5rem; }
+  .page-main-title { font-size: 1.5rem; }
+  .page-main-value { font-size: 2rem; }
+  .card-value, .metric-value { font-size: 1.25rem; }
+  .card.card-net-worth .card-value { font-size: 1.75rem; }
+
+  /* Stack filter form elements on mobile for better usability */
+  .filter-form .row > div[class*="col-"] {
+      margin-bottom: var(--spacing-sm);
+  }
+  .filter-form .d-flex.justify-content-end {
+      flex-direction: column;
+      align-items: stretch; /* Make buttons full width */
+  }
+  .filter-form .d-flex.justify-content-end .btn {
+      width: 100%;
+      margin-bottom: var(--spacing-xs);
+  }
+  .filter-form .d-flex.justify-content-end .btn:last-child {
+      margin-bottom: 0;
+  }
+}
+
+/* Ensure this definition exists if not already in your :root */
+:root {
+    --accent-quaternary-rgb: 0, 201, 225; /* Cyan for .alert-info */
+}
+
+/* Fix for alert close buttons based on the provided alert styles */
+.alert .btn-close {
+    filter: invert(75%) sepia(10%) saturate(500%) hue-rotate(180deg) brightness(100%) contrast(85%);
+}
+.alert-success .btn-close {
+    filter: invert(60%) sepia(50%) saturate(500%) hue-rotate(80deg) brightness(100%) contrast(85%);
+}
+.alert-danger .btn-close {
+    filter: invert(50%) sepia(50%) saturate(500%) hue-rotate(320deg) brightness(100%) contrast(85%);
+}
+.alert-info .btn-close { /* Specific for info if colors are different */
+    filter: invert(60%) sepia(70%) saturate(500%) hue-rotate(140deg) brightness(100%) contrast(85%);
+}

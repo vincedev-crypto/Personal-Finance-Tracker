@@ -1,0 +1,85 @@
+/* static/css/about-us.css */
+
+.about-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--text-headings); /* This should be bright white/light grey */
+}
+.about-header h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    /* Color is inherited from .about-header or can be set explicitly if needed */
+}
+.about-header p {
+    font-size: 1.1rem;
+    color: var(--text-secondary); /* This is usually a slightly dimmer, but still readable grey */
+    max-width: 700px;
+    margin: 0.5rem auto 0;
+}
+
+.about-section {
+    background-color: var(--bg-card);
+    padding: 2rem;
+    border-radius: var(--border-radius-lg);
+    margin-bottom: 2rem;
+    box-shadow: var(--box-shadow-card);
+}
+
+.about-section h3 {
+    color: var(--accent-primary); /* This is the blue color for section titles, looks good */
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+/*
+ * UPDATED FOR BETTER VISIBILITY:
+ * Changed from var(--text-primary) to var(--text-headings)
+ * This will make the main paragraph and list item text as bright as the main page title.
+ * If var(--text-headings) is not defined as white in your dashboard.css,
+ * you can use a specific color like #FFFFFF or #F0F0F0.
+ */
+.about-section p,
+.about-section ul {
+    color: var(--text-headings); /* Or try #FFFFFF or #F0F0F0 if --text-headings isn't bright enough */
+    line-height: 1.7;
+}
+
+.about-section ul {
+    padding-left: 1.5rem;
+}
+
+.about-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.team-member-card {
+    text-align: center;
+    /* The background is already defined by .about-section being a .card,
+       or if these are separate cards, their own .card style from dashboard.css.
+       If you want a different background for team cards specifically:
+       background-color: var(--bg-card-hover);
+    */
+    padding: 1.5rem; /* This padding is for the content inside the team member card's structure if it's not already a card itself */
+    border-radius: var(--border-radius-base);
+    margin-bottom: 1rem; /* If these are individual elements needing margin */
+}
+
+.team-member-card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    border: 3px solid var(--accent-secondary);
+}
+
+.team-member-card h5 {
+    color: var(--text-headings);
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+}
+
+.team-member-card p.role {
+    color: var(--accent-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+}

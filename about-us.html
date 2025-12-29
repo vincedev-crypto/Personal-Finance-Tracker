@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Personal Finance Tracker</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/about-us.css}">
+
+</head>
+<body>
+
+    <div th:replace="~{sidebar :: sidebar}"></div>
+
+    <div class="main-content">
+        <div class="container-fluid">
+
+            <div class="about-header py-4">
+                <h2><i class="fas fa-info-circle me-2"></i>About Personal Finance Tracker</h2>
+                <p>Empowering you to take control of your financial future with simplicity and clarity.</p>
+            </div>
+
+            <div class="about-section card">
+                <div class="card-body">
+                    <h3>Our Mission</h3>
+                    <p>At Personal Finance Tracker, our mission is to provide an intuitive, secure, and comprehensive platform that helps individuals effortlessly manage their personal finances. We believe that financial literacy and control are the cornerstones of a secure future, and we're dedicated to making these accessible to everyone.</p>
+                </div>
+            </div>
+
+            <div class="about-section card">
+                <div class="card-body">
+                    <h3>What We Offer</h3>
+                    <p>Our application is designed with you in mind, offering a suite of features to help you stay on top of your finances:</p>
+                    <ul>
+                        <li><strong>Transaction Tracking:</strong> Easily record and categorize your income and expenses.</li>
+                        <li><strong>Budget Management:</strong> Set monthly budgets and monitor your spending against your goals. Receive notifications to stay on track.</li>
+                        <li><strong>Insightful Reports:</strong> Generate comprehensive financial reports to understand your spending habits, income sources, and overall financial health. Visualize your data with clear charts.</li>
+                        <li><strong>Secure Platform:</strong> We prioritize the security of your data with email verification, password encryption, and adherence to data privacy best practices.</li>
+                        <li><strong>User-Friendly Interface:</strong> A clean and modern design ensures a seamless experience across devices.</li>
+                        <li><strong>Notifications:</strong> Stay informed with real-time notifications about budget thresholds and important account activities.</li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="about-section card">
+                <div class="card-body">
+                    <h3>Contact Us</h3>
+                    <p>Have questions, feedback, or need support? We'd love to hear from you!</p>
+                    <p>Email us at: <a href="mailto:support@yourfinanceapp.com">support@yourfinanceapp.com</a> </p>
+                </div>
+            </div>
+
+        </div> </div> <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script th:if="${session.loggedInUser != null}" th:inline="javascript">
+        /*<![CDATA[*/
+        window.loggedInUsername = /*[[${session.loggedInUser.email}]]*/ null;
+        /*]]>*/
+    </script>
+    <script src="/js/notification.js" th:src="@{/js/notification.js}"></script>
+</body>
+</html>

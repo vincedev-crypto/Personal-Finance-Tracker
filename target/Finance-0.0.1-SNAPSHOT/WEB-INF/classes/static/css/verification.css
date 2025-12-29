@@ -1,0 +1,73 @@
+body.verification-page {
+  font-family: var(--font-family-base, 'Inter', sans-serif);
+  background-color: var(--bg-main, #161824); /* Dark theme background */
+  color: var(--text-primary, #E0E0E0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: var(--spacing-lg, 1.5rem);
+  text-align: center;
+}
+
+.verification-container.card {
+  background-color: var(--bg-card, #2A2D40);
+  border-radius: var(--border-radius-lg, 0.75rem);
+  padding: var(--spacing-xl, 2rem);
+  box-shadow: var(--box-shadow-card, 0 4px 10px rgba(0,0,0,0.15));
+  max-width: 550px; /* Or desired width */
+  width: 100%;
+  border: 1px solid var(--border-color, #3A3D52);
+}
+
+.verification-container .card-title {
+  color: var(--text-headings, #FFFFFF);
+  font-weight: 600;
+  margin-bottom: var(--spacing-md, 1rem);
+}
+
+.verification-container .alert {
+  text-align: left;
+  font-size: var(--font-size-sm, 0.875rem);
+}
+
+.verification-container p {
+  color: var(--text-primary, #E0E0E0);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-sm, 0.5rem);
+}
+
+.verification-container a.btn-primary {
+  background-color: var(--accent-primary, #6289F5);
+  border-color: var(--accent-primary, #6289F5);
+  color: var(--text-headings, #FFFFFF);
+}
+.verification-container a.btn-primary:hover {
+  background-color: var(--text-link-hover, #79A0FF);
+  border-color: var(--text-link-hover, #79A0FF);
+}
+ .verification-container a.btn-link {
+  color: var(--accent-quaternary, #00C9E1);
+}
+.verification-container a.btn-link:hover {
+  color: var(--text-link-hover, #79A0FF);
+}
+
+/* Ensure CSS variables are defined if dashboard.css is not globally loaded for this page */
+/* Minimal set for verification page if dashboard.css isn't linked (better to link dashboard.css) */
+:root {
+  --bg-main: #161824;
+  --bg-card: #2A2D40;
+  --text-primary: #E0E0E0;
+  --text-headings: #FFFFFF;
+  --border-color: #3A3D52;
+  --border-radius-lg: 0.75rem;
+  --spacing-xl: 2rem;
+  --spacing-lg: 1.5rem;
+  --spacing-md: 1rem;
+  --spacing-sm: 0.5rem;
+  --accent-primary: #6289F5;
+  --text-link-hover: #79A0FF;
+  --accent-quaternary: #00C9E1;
+}

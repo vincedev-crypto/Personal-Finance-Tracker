@@ -1,0 +1,148 @@
+/* static/css/login.css */
+/* This file will primarily import or use variables from dashboard.css (dark-theme.css)
+   If you want login/register pages to be standalone without dashboard.css,
+   you'd need to redefine common variables here.
+   Assuming dashboard.css (as dark-theme.css) is loaded first.
+*/
+
+body.auth-page { /* Add class="auth-page" to login.html body */
+  font-family: var(--font-family-base, 'Inter', sans-serif);
+  background-color: var(--bg-main, #161824); /* Use main dark background */
+  color: var(--text-primary, #E0E0E0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: var(--spacing-lg, 1.5rem);
+}
+
+.auth-card-container {
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-card {
+  background-color: var(--bg-card, #2A2D40);
+  border-radius: var(--border-radius-lg, 0.75rem);
+  padding: var(--spacing-xl, 2rem);
+  box-shadow: var(--box-shadow-card, 0 4px 10px rgba(0,0,0,0.15));
+  text-align: center;
+}
+
+.auth-card .auth-header-logo img { /* If you had a logo image */
+  max-width: 50px; /* Adjust */
+  margin-bottom: var(--spacing-md, 1rem);
+  /* filter: brightness(0) invert(1); /* To make a dark logo white */
+}
+
+.auth-card h2, .auth-card h3 { /* Login page titles */
+  color: var(--text-headings, #FFFFFF);
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm, 0.5rem);
+}
+.auth-card h2 { font-size: 1.5rem; } /* "Welcome! Please Log In" */
+.auth-card h3 { font-size: 1.2rem; } /* "User Login" */
+
+.auth-card p.auth-subtext { /* "Enter your email to receive..." */
+    color: var(--text-secondary, #A0A0B5);
+    font-size: var(--font-size-sm, 0.875rem);
+    margin-bottom: var(--spacing-lg, 1.5rem);
+}
+
+.auth-card .form-label {
+  font-weight: 500;
+  display: block;
+  text-align: left;
+  color: var(--text-secondary, #A0A0B5);
+  margin-bottom: var(--spacing-xs, 0.25rem);
+  font-size: var(--font-size-sm, 0.875rem);
+}
+
+.auth-card .form-control {
+  background-color: var(--bg-input, #1A1C2A);
+  border: 1px solid var(--border-color, #3A3D52);
+  color: var(--text-primary, #E0E0E0);
+  border-radius: var(--border-radius-base, 0.5rem);
+  padding: 0.7rem 1rem; /* Slightly less padding than main app inputs */
+  width: 100%;
+  margin-bottom: var(--spacing-md, 1rem);
+  transition: var(--transition-base, all 0.25s ease-in-out);
+}
+.auth-card .form-control::placeholder {
+  color: var(--text-secondary, #A0A0B5);
+  opacity: 0.6;
+}
+.auth-card .form-control:focus {
+  background-color: var(--bg-input-focus, #232539);
+  border-color: var(--accent-primary, #6289F5);
+  box-shadow: 0 0 0 0.2rem rgba(var(--accent-primary-rgb, 98, 137, 245), 0.25);
+}
+
+.auth-card .btn-primary { /* Login/Register button */
+  background-color: var(--accent-primary, #6289F5);
+  border-color: var(--accent-primary, #6289F5);
+  color: var(--text-headings, #FFFFFF);
+  padding: 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  width: 100%;
+  border-radius: var(--border-radius-base, 0.5rem);
+  transition: var(--transition-base, all 0.25s ease-in-out);
+}
+.auth-card .btn-primary:hover {
+  background-color: var(--text-link-hover, #79A0FF);
+  border-color: var(--text-link-hover, #79A0FF);
+  transform: translateY(-2px);
+  box-shadow: var(--box-shadow-interactive, 0 2px 8px rgba(0,0,0,0.2));
+}
+
+.auth-card .auth-links { /* "Forgot Password | Create an Account" */
+  margin-top: var(--spacing-lg, 1.5rem);
+  font-size: var(--font-size-sm, 0.875rem);
+}
+.auth-card .auth-links a {
+  color: var(--accent-quaternary, #00C9E1); /* Using a different accent for these links */
+  font-weight: 500;
+}
+.auth-card .auth-links a:hover {
+  color: var(--text-link-hover, #79A0FF);
+  text-decoration: underline;
+}
+.auth-card .auth-links span { /* Separator "|" */
+  margin: 0 var(--spacing-sm, 0.5rem);
+  color: var(--text-secondary, #A0A0B5);
+  opacity: 0.5;
+}
+
+/* Alert styling for login errors */
+.auth-card .alert.alert-danger {
+  background-color: rgba(var(--status-danger-rgb, 255, 122, 122), 0.1); /* Define status-danger-rgb */
+  border: 1px solid var(--status-danger, #FF7A7A);
+  border-left-width: 4px;
+  color: var(--status-danger, #FF7A7A);
+  text-align: left;
+  font-size: var(--font-size-sm, 0.875rem);
+  padding: var(--spacing-sm, 0.5rem) var(--spacing-md, 1rem);
+}
+/* Success message on login page (e.g., after registration/password reset) */
+.auth-card .alert.alert-success {
+  background-color: rgba(var(--status-success-rgb, 50, 215, 164), 0.1); /* Define status-success-rgb */
+  border: 1px solid var(--status-success, #32D7A4);
+  border-left-width: 4px;
+  color: var(--status-success, #32D7A4);
+  text-align: left;
+  font-size: var(--font-size-sm, 0.875rem);
+  padding: var(--spacing-sm, 0.5rem) var(--spacing-md, 1rem);
+}
+
+
+/* Optional: Minimalist footer for auth pages */
+.auth-page-footer {
+  padding: var(--spacing-md, 1rem) 0;
+  font-size: var(--font-size-xs, 0.75rem);
+  color: var(--text-secondary, #A0A0B5);
+  text-align: center;
+  width: 100%;
+  margin-top: auto; /* Pushes to bottom if body is flex column */
+}

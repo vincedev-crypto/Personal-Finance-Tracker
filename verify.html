@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Verification Page</title>
+    <meta charset="UTF-8">
+    <script th:if="${status == 'success'}">
+        setTimeout(function() {
+            window.location.href = '/login';
+        }, 5000); // 5000 milliseconds = 5 seconds
+    </script>
+</head>
+<body>
+    <h2>Token Verification</h2>
+    <p th:text="${message}"></p>
+
+    <p th:if="${status == 'success'}">You will be redirected to the login page in 5 seconds.</p>
+</body>
+</html>

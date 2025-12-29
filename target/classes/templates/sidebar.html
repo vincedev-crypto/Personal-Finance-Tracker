@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div class="sidebar" th:fragment="sidebar">
+        <a class="navbar-brand" th:href="@{/dashboard}">
+            <div class="app-name">
+                <span class="main">PERSONAL FINANCE TRACKER</span>
+                </div>
+        </a>
+        <ul class="nav flex-column mt-4">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/dashboard}"
+                   th:classappend="${currentPage == 'dashboard'} ? 'active' : ''">
+                    <i class="fas fa-home fa-fw me-2"></i>Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/transactions}"
+                   th:classappend="${currentPage == 'transactions'} ? 'active' : ''">
+                    <i class="fas fa-exchange-alt fa-fw me-2"></i>Transactions
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/report}"
+                   th:classappend="${currentPage == 'report'} ? 'active' : ''">
+                    <i class="fas fa-chart-bar fa-fw me-2"></i>Report
+                </a>
+            </li>
+            <li class="nav-item">
+                 <a class="nav-link" th:href="@{/profile}"
+                    th:classappend="${currentPage == 'profile' or currentPage == 'change-password'} ? 'active' : ''">
+                    <i class="fas fa-user fa-fw me-2"></i>Profile
+                 </a>
+            </li>
+            <li class="nav-item dropdown mt-3" id="notificationsDropdownContainer">
+                <a class="nav-link" href="#" id="notificationsBell" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-bell fa-fw me-2"></i>Notifications
+                    <span class="badge rounded-pill bg-danger ms-1" id="notificationBadge" style="display: none;">0</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="notificationsBell" id="notificationsList">
+                    <li><h6 class="dropdown-header">Notifications</h6></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <div id="notificationItemsContainer">
+                        <li><a class="dropdown-item text-muted fst-italic">Loading...</a></li>
+                    </div>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-center" href="#" id="markAllAsReadBtn">Mark all as read</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/about-us}"
+                   th:classappend="${currentPage == 'about-us'} ? 'active' : ''">
+                    <i class="fas fa-info-circle fa-fw me-2"></i>About Us
+                </a>
+            </li>
+            <li class="nav-item mt-auto">
+                <a class="nav-link" th:href="@{/logout}">
+                    <i class="fas fa-sign-out-alt fa-fw me-2"></i>Logout
+                </a>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration - Personal Finance Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/Login.css}" rel="stylesheet">
+    <link th:href="@{/css/dashboard.css}" rel="stylesheet">
+    
+    <style>
+        /* Optional: Style for the modal trigger link */
+        .modal-trigger-link {
+            text-decoration: underline;
+            cursor: pointer;
+            color: var(--bs-link-color); /* Bootstrap link color or your custom link color */
+        }
+        .modal-trigger-link:hover {
+            color: var(--bs-link-hover-color);
+        }
+    </style>
+</head>
+<body class="d-flex justify-content-center align-items-center vh-100 bg-light">
+
+    <div class="card shadow-lg p-4 w-100" style="max-width: 400px;">
+        <h2 class="text-center mb-4">User Registration</h2>
+
+        <div th:if="${errorMessage}" class="alert alert-danger text-center">
+            <p th:text="${errorMessage}" class="mb-0"></p>
+        </div>
+
+       <form th:action="@{/user/save}" method="post" id="registrationForm">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" id="email" placeholder="Enter your email" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" id="password" placeholder="Enter your password" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                <input type="password" name="confirmPassword" class="form-control" id="confirmPassword" placeholder="Confirm your password" required>
+            </div>
+
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="dataPrivacyCheck" name="dataPrivacyCheck" required>
+                <label class="form-check-label" for="dataPrivacyCheck">
+                    I have read and agree to the
+                    <span class="modal-trigger-link" data-bs-toggle="modal" data-bs-target="#dataPrivacyModal">
+                        Data Privacy Act of the Philippines
+                    </span>.
+                </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100" id="registerButton">Register</button>
+        </form>
+
+        <div class="mt-3 text-center">
+            <a href="/login" class="text-decoration-none">Already have an account? Login</a>
+        </div>
+    </div>
+
+    <div class="modal fade" id="dataPrivacyModal" tabindex="-1" aria-labelledby="dataPrivacyModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="dataPrivacyModalLabel">Data Privacy Act of the Philippines</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Our Commitment to Your Privacy</strong></p>
+                    <p>This application, Personal Finance Tracker, is committed to protecting your privacy in accordance with the Republic Act No. 10173, also known as the Data Privacy Act of 2012, and its Implementing Rules and Regulations.</p>
+
+                    <p><strong>Information We Collect</strong></p>
+                    <p>When you register for an account, we collect the following personal information:</p>
+                    <ul>
+                        <li>Email Address: Used for account creation, login, password recovery, and important notifications related to your account or our services.</li>
+                        <li>Password: Used to secure your account access (stored in an encrypted format).</li>
+                    </ul>
+                    <p>As you use the application to track your finances, you will be providing financial data such as income, expenses, budget details, and transaction descriptions. This information is essential for the functionality of the application.</p>
+
+                    <p><strong>How We Use Your Information</strong></p>
+                    <ul>
+                        <li>To provide and maintain the Personal Finance Tracker services.</li>
+                        <li>To manage your account and provide you with customer support.</li>
+                        <li>To send you service-related notifications, security alerts, and updates.</li>
+                        <li>To help you track and manage your personal finances effectively.</li>
+                        <li>To comply with legal obligations as required by Philippine law.</li>
+                    </ul>
+                    <p>We will not use your personal or financial data for purposes other than those explicitly stated here or to which you have consented.</p>
+
+                    <p><strong>Data Sharing and Disclosure</strong></p>
+                    <p>We do not sell, trade, or otherwise transfer your personally identifiable information or your financial data to outside parties unless we provide users with advance notice or are required by law to do so (e.g., in response to a court order or other legal process).</p>
+
+                    <p><strong>Data Security</strong></p>
+                    <p>We implement a variety of security measures to maintain the safety of your personal information when you enter, submit, or access your personal information. These include [mention general security measures, e.g., encryption, secure servers, access controls].</p>
+
+                    <p><strong>Your Rights as a Data Subject</strong></p>
+                    <p>Under the Data Privacy Act of 2012, you have the right to:</p>
+                    <ul>
+                        <li>Be informed about the processing of your personal data.</li>
+                        <li>Access your personal data.</li>
+                        <li>Rectify any inaccuracy or error in your personal data.</li>
+                        <li>Object to the processing of your personal data.</li>
+                        <li>Erasure or blocking of your personal data.</li>
+                        <li>Be indemnified for damages.</li>
+                        <li>Lodge a complaint with the National Privacy Commission.</li>
+                    </ul>
+                    <p>You can exercise these rights by contacting us through [Provide a contact method, e.g., an email address for privacy concerns].</p>
+
+                    <p><strong>Consent</strong></p>
+                    <p>By checking the "I have read and agree" box and clicking "Register", you consent to the collection, processing, and use of your personal information as described in this Data Privacy Statement and in accordance with the Data Privacy Act of the Philippines.</p>
+
+                    <p>For more detailed information, please refer to our full <a href="/data-privacy-policy-full" target="_blank">Data Privacy Policy</a>.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="agreeDataPrivacy">Agree and Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const dataPrivacyCheck = document.getElementById('dataPrivacyCheck');
+            const agreeButton = document.getElementById('agreeDataPrivacy');
+            const dataPrivacyModal = new bootstrap.Modal(document.getElementById('dataPrivacyModal'));
+            const registerButton = document.getElementById('registerButton');
+            const registrationForm = document.getElementById('registrationForm');
+
+            // Initially disable the register button if the checkbox isn't checked (optional)
+            // registerButton.disabled = !dataPrivacyCheck.checked;
+
+            // Enable/disable register button based on checkbox state (optional, if not relying solely on 'required' attribute)
+            // dataPrivacyCheck.addEventListener('change', function() {
+            //     registerButton.disabled = !this.checked;
+            // });
+
+            if (agreeButton) {
+                agreeButton.addEventListener('click', function () {
+                    dataPrivacyCheck.checked = true;
+                    // Manually trigger change event if other listeners depend on it
+                    const event = new Event('change');
+                    dataPrivacyCheck.dispatchEvent(event);
+                    // registerButton.disabled = false; // Enable if previously disabled
+                    dataPrivacyModal.hide();
+                });
+            }
+
+            // Prevent form submission if checkbox is not checked (alternative to 'required' or for more complex logic)
+            // registrationForm.addEventListener('submit', function(event) {
+            //     if (!dataPrivacyCheck.checked) {
+            //         alert('You must agree to the Data Privacy Act to register.');
+            //         event.preventDefault(); // Stop form submission
+            //     }
+            // });
+        });
+    </script>
+</body>
+</html>

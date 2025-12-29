@@ -1,0 +1,152 @@
+/* static/css/report.css */
+
+/*
+  This file assumes dashboard.css is loaded first.
+  It uses variables from dashboard.css for theme consistency.
+  Global layout styles (body, sidebar) should be handled by dashboard.css.
+*/
+
+/* Report page specific title (if different from general .dashboard-title-style) */
+.report-page-header h2 { /* Assuming you have a wrapper like this in report.html */
+    color: var(--text-headings);
+    font-size: 1.8rem; /* Match dashboard general titles */
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Report Summary Card (the one with Total Income/Expense/Net for the month) */
+.report-summary-card {
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--border-color);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg); /* Consistent margin */
+}
+
+.report-summary-card .card-title,
+.report-summary-card h5, /* If h5 is used for title */
+.report-summary-card h6 { /* Labels "Total Income", "Total Expenses" */
+    color: var(--text-headings);
+    margin-bottom: var(--spacing-sm);
+}
+.report-summary-card p.fs-5 { /* Values like ₱0.00 */
+    font-weight: 600;
+}
+/* income/expense classes will use variables from dashboard.css */
+.report-summary-card .income { color: var(--status-success) !important; }
+.report-summary-card .expense { color: var(--status-danger) !important; }
+.report-summary-card .net-positive { color: var(--status-success) !important; }
+.report-summary-card .net-negative { color: var(--status-danger) !important; }
+
+
+/* Card styling for cards holding filters, charts, and table on report page */
+/* You can add a common class like .report-content-card to these cards in report.html */
+.report-content-card {
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-lg);
+    margin-bottom: var(--spacing-lg);
+}
+.report-content-card .card-header { /* Style for headers of these cards */
+    background-color: transparent;
+    border-bottom: 1px solid var(--border-color-light);
+    color: var(--text-headings);
+    font-weight: 600;
+    font-size: 1.05rem; /* Slightly adjusted header size */
+    padding: var(--spacing-md) var(--spacing-lg);
+}
+.report-content-card .card-body {
+    padding: var(--spacing-lg);
+}
+.report-content-card .card-body h5.card-title { /* E.g. "Select Report Month" */
+    color: var(--text-secondary); /* More muted for this type of title */
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* Table styling (inherits from .table in dashboard.css but can be refined) */
+.report-content-card .table thead th {
+    background-color: var(--bg-card-hover);
+    color: var(--text-headings);
+    /* Other properties like font-size, padding are inherited or set in dashboard.css .table thead th */
+}
+.report-content-card .table tbody td {
+    /* Inherits from dashboard.css .table td */
+}
+.report-content-card .table-striped > tbody > tr:nth-of-type(odd) > * {
+    --bs-table-accent-bg: rgba(255, 255, 255, 0.03); /* Slightly different striping if needed */
+}
+
+/* Chart container */
+.chart-container {
+    width: 100%;
+    min-height: 350px;
+    flex-grow: 1;
+    /* background-color for charts should be set in JS chart options (e.g., 'transparent')
+       so they adapt to the card's background color (var(--bg-card)) */
+}
+
+/* Filter form elements on report page */
+.report-content-card .form-select { /* Select month dropdown */
+    /* Uses .form-select from dashboard.css */
+}
+.report-content-card .btn-primary { /* "Generate" button */
+    /* Uses .btn-primary from dashboard.css */
+}
+.report-content-card .btn-success { /* "Download CSV" button */
+    /* Uses .btn-success from dashboard.css */
+}
+.report-content-card .btn-success.disabled,
+.report-content-card .btn-success:disabled {
+    opacity: 0.6; /* Ensure disabled state is clear */
+    background-color: var(--status-success); /* Keep color but reduce opacity */
+    border-color: var(--status-success);
+}
+
+/* Income/Expense specific icons in table (report.html has this structure) */
+.report-content-card .table .fa-long-arrow-alt-up.text-success {
+    color: var(--status-success) !important;
+}
+.report-content-card .table .fa-long-arrow-alt-down.text-danger {
+    color: var(--status-danger) !important;
+}
+.table-danger-light td,
+.table-success-light td {
+  color: #212529 !important; /* Dark text for Description, Category */
+}
+
+/* For the "Type" column (icon and text like "Expense") on .table-danger-light rows */
+.table-danger-light td i.text-danger,
+.table-danger-light td span { /* This targets the "Expense" text span in the Type column */
+  color: #B80000 !important; /* Darker Red for "Expense" text and icon */
+}
+
+/*
+  For the "Amount" column on .table-danger-light rows.
+  The HTML uses class 'expense' for the <td>.
+  This ensures the expense amount is a darker, readable red.
+  If your 'number 1' issue is here (red number on light background), this is the key fix.
+*/
+.table-danger-light td.expense {
+  color: #B80000 !important; /* Darker Red for expense amounts */
+}
+
+/* ---- Styles for Income rows if they also use a light background ---- */
+
+/* For the "Type" column (icon and text like "Income") on .table-success-light rows */
+.table-success-light td i.text-success,
+.table-success-light td span { /* This targets the "Income" text span in the Type column */
+  color: #146c43 !important; /* Darker Green for "Income" text and icon */
+}
+
+/*
+  For the "Amount" column on .table-success-light rows.
+  The HTML uses class 'income' for the <td>.
+  This ensures the income amount is a darker, readable green.
+*/
+.table-success-light td.income {
+  color: #146c43 !important; /* Darker Green for income amounts */
+}
